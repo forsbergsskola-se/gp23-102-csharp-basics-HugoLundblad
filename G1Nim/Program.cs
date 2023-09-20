@@ -7,11 +7,19 @@ Console.WriteLine($"{new string ('|', matchNum)} ({matchNum})");
 NEW_ROUND:
 Console.WriteLine("How many matches do you want to draw? (1-3)");
 USER_INPUT:
-int userInput = int.Parse(Console.ReadLine());
+if(!int.TryParse(Console.ReadLine(), out int userInput)){
+    Console.WriteLine("Invalid input");
+    goto USER_INPUT;
+}
 
 if (userInput > 3 || userInput < 1) //BONUS point out if 1 left and user enters 3
 {
     Console.WriteLine("Please choose a valid number. (1-3)");
+    goto USER_INPUT;
+}
+else if (userInput > matchNum)
+{
+    Console.WriteLine($"You cannot draw {userInput} as there are only {matchNum} matches left.");
     goto USER_INPUT;
 }
 
